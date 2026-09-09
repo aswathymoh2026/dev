@@ -1,0 +1,26 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Display files
+        run: ls -la
+
+      - name: Run test
+        run: 
+            echo "running the test!"
+            test -f index.html
+
+      - name: Build stage
+        run: echo "running the build!"
