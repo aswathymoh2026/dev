@@ -1,4 +1,4 @@
-name: Devops demo
+name: Devops demo 1
 
 on:
   push:
