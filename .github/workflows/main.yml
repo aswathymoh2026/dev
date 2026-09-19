@@ -43,4 +43,3 @@ jobs:
 
       - name: Build stage
         run: echo "Running the build!"
-```
