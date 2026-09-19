@@ -6,7 +6,6 @@ on:
       - main
       - dev
 
-# Required for Azure OIDC login
 permissions:
   id-token: write
   contents: read
@@ -15,9 +14,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # IMPORTANT: Connect workflow to your GitHub Environment
+    environment: AZ_CLI_ID
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Verify Azure Secrets
+        env:
+          CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: |
+          [ -n "$CLIENT_ID" ] && echo "Client ID is set" || echo "Client ID is MISSING"
+          [ -n "$TENANT_ID" ] && echo "Tenant ID is set" || echo "Tenant ID is MISSING"
 
       - name: Azure Login using Service Principal
         uses: azure/login@v2
