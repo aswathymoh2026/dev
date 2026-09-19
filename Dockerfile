@@ -1,1 +1,2 @@
+#ngnix
 FROM ngnix:latest
